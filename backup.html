@@ -63,87 +63,99 @@
 						<p class="fragment" data-fragment-index="1">I started out writing bad javascript</p>
 						<p class="fragment" data-fragment-index="2">then bad jQuery</p>
 						<p class="fragment" data-fragment-index="3">then bad Backbone</p>
-						<p class="fragment" data-fragment-index="4">then bad Angular</p>
-						<p class="fragment" data-fragment-index="5">then bad Ember</p>
-						<p class="fragment" data-fragment-index="6">then good Ember</p>
-						<aside class="notes">
-							<br>- jQuery plugins made life easy to pump tons of functionality into your apps, but was messy
-							<br>- backbone made some modest improvements in the lifecycle by introducing routing
-							<br>- Angular was so fancy! Dependency injections, more intelligent routing, data binding! 
-							<br>- Angular was also a mess, in my opinion.  The lack of overall vision and project definition felt like module-mud-pie
-							<br>- Ember went through a ton of churn early, but the focus on routing and being built with more conventions was pleasent
-							<br>- Ember feels like Objective-C, in a lot of ways. the MVC paradigm has survived since Objective-J / Sproutcore days, this is a good thing
-						</aside>
+						<p class="fragment" data-fragment-index="4">then bad node</p>
+						<p class="fragment" data-fragment-index="5">then bad ember</p>
+						<p class="fragment" data-fragment-index="6">then good ember</p>
 					</section>
 				</section>
 
-
+				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>The Basic Pitch</h2>
-						<p class="fragment">Flexible, Declarative, Composable API.</p>
-						<p class="fragment">Mixins, forward-compatable web components.</p>
-						<p class="fragment">(if you use ember-cli) write ES6 JS today.</p>
-						<p class="fragment">Dedication to sane depreciations, RFC process.</p>
-						<p class="fragment">Constantly Improving.</p>
-						<p class="fragment"><i>Behavioral</i> actions API.</p>
-						<p class="fragment">Writing ember fast makes you feel like a superhero.</p>
+						<h2>Vertical Slides</h2>
+						<p>Slides can be nested inside of each other.</p>
+						<p>Use the <em>Space</em> key to navigate through all slides.</p>
+						<br>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section>
+						<h2>Basement Level 1</h2>
+						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+					</section>
+					<section>
+						<h2>Basement Level 2</h2>
+						<p>That's it, time to go back up.</p>
+						<br>
+						<a href="#/2">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+
+				<section>
+					<h2>Slides</h2>
+					<p>
+						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Point of View</h2>
+					<p>
+						Press <strong>ESC</strong> to enter the slide overview.
+					</p>
+					<p>
+						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
+					</p>
+				</section>
+
+				<section>
+					<h2>Touch Optimized</h2>
+					<p>
+						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+					</p>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						Write content using inline or external Markdown.
+						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+						```
+						<section data-markdown>
+						  ## Markdown support
+
+						  Write content using inline or external Markdown.
+						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
 
 						<aside class="notes">
-							<br> - No focus on build tools, no focus on compilers, no focus on testing integration.  It's the most batteries included framework with ember-cli
-							<br> - jQuery, Handlebars (Htmlbars), RSVP, Babel, node, etc
-							<br> - ES6 opens up doors for proper modularization, getting rid of quirks and tribulations of things like r.js, browserify, 
+							This slide has fragments which are also stepped through in the notes window.
 						</aside>
 					</section>
-
 					<section>
-						<h2>The Basic Pitch</h2>
-						<h3>Flexible, Declarative, Composable API</h3>
-						<h4>Declarative</h4>
-						<pre class="fragment"><code data-trim contenteditable>
-import Ember from 'ember';
-
-export default Ember.Component.extend(SomeMixin, {
-
-  didInsertElement: function () {
-  	// do something when the component is appended to the dom
-  	this.get('parentElement').send('someActionName');
-  },
-  willDestroyElement: function () {
-    // do something when the component is removed from the dom
-  },
-  
-
-  click: function (event) {
-    // react to a click event
-  },
-
-
-});
-						</code></pre>
-					</section>
-					<section>
-						<h2>The Basic Pitch</h2>
-						<h3>Flexible, Declarative, Composable API</h3>
-						<h4>Composable</h4>
-						<pre class="fragment"><code data-trim contenteditable>
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-  // creates a section tag
-  tagName: '',
-
-  // will populate the class attr of the tag
-  classNames: ['rad-component'],
-
-  // binds dataColumns to data-colums and dataRows to data-rows attrs
-  attributeBindings: ['data-columns', 'data-rows'],
-
-  // binds the isActive component property to the class 'is-active'
-  // based on isActive being a truthy property
-  classNameBindings: ['isActive', 'isDisabled']
-});
-						</code></pre>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment current-visible">current-visible</p>
+						<p class="fragment highlight-red">highlight-red</p>
+						<p class="fragment highlight-blue">highlight-blue</p>
 					</section>
 				</section>
 
