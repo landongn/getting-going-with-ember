@@ -69,7 +69,7 @@
 						<aside class="notes">
 							<br>- jQuery plugins made life easy to pump tons of functionality into your apps, but was messy
 							<br>- backbone made some modest improvements in the lifecycle by introducing routing
-							<br>- Angular was so fancy! Dependency injections, more intelligent routing, data binding! 
+							<br>- Angular was so fancy! Dependency injections, more intelligent routing, data binding!
 							<br>- Angular was also a mess, in my opinion.  The lack of overall vision and project definition felt like module-mud-pie
 							<br>- Ember went through a ton of churn early, but the focus on routing and being built with more conventions was pleasent
 							<br>- Ember feels like Objective-C, in a lot of ways. the MVC paradigm has survived since Objective-J / Sproutcore days, this is a good thing
@@ -92,11 +92,11 @@
 						<aside class="notes">
 							<br> - No focus on build tools, no focus on compilers, no focus on testing integration.  It's the most batteries included framework with ember-cli
 							<br> - jQuery, Handlebars (Htmlbars), RSVP, Babel, node, etc
-							<br> - ES6 opens up doors for proper modularization, getting rid of quirks and tribulations of things like r.js, browserify, 
+							<br> - ES6 opens up doors for proper modularization, getting rid of quirks and tribulations of things like r.js, browserify,
 						</aside>
 					</section>
 
-	
+
 					<section>
 						<h2>The Basic Pitch</h2>
 						<h3>Flexible, Declarative, Composable API</h3>
@@ -131,7 +131,7 @@ export default Ember.Component.extend({
 	isEmpty: function () {
 	return this.get('cart').length ? true ; false;
 	}.property('cart')
-	
+
 });
 
 {{#if isEmpty}}
@@ -193,11 +193,11 @@ Router.map(function() {
   // defines a standalone route with no substates or arguments
   // routable as 'stateA'
   this.route('stateA');
-  
+
   // defines a standalone route with no substates and an argument
   // routable as 'stateB'
   this.route('stateB', {path: '/stateB/:someArgument'});
-  
+
   // defines a route with a child state
   // routable as superState.loading, superState.error,
   // superState.index, superState.childState
@@ -209,11 +209,83 @@ Router.map(function() {
 
 </code></pre>
 					</section>
+
+					<section>
+						<h2>The Router is kind of like a rubix cube with callbacks.</h2>
+						<p class="fragment">When the router detects a change, it kicks off a series of ordered events -- a lifecyle -- that reconfigures <i>all the things.</i></p>
+						<p class="fragment">It first configures it's Route classes:</p>
+					</section>
+
+					<section>
+						<p class="fragment"><code>beforeModel(transition)</code></p>
+						<p class="fragment">
+							<code>
+								model(params)
+							</code>
+						</p>
+						<p class="fragment">
+							<code>
+								afterModel()
+							</code>
+						</p>
+						<p class="fragment">
+							<code>
+								setupController(controller, model)
+							</code>
+						</p>
+						<p class="fragment">
+							<code>
+								renderTemplate()
+							</code>
+						</p>
+					</section>
+
+					<section>
+						<p class="fragment">then, once the templates are rendered (in <code>Route::renderTemplate</code>).</p>
+						<p class="fragment">controller contexts are created based on what's defined in the templates (more on that later)</p>
+						<p class="fragment">view lifecycle events then start:</p>
+					</section>
+
+					<section>
+						<p class="fragment"><code>beforeModel(transition)</code></p>
+						<p class="fragment">
+							<code>
+								willInsertElement()
+							</code>
+						</p>
+						<p class="fragment">
+							<code>
+								didInsertElement()
+							</code>
+						</p>
+						<p class="fragment">
+							<code>
+								willDestroyElement()
+							</code>
+						</p>
+					</section>
+
+
+					<section>
+						<h2>Treat the lifecycle as a collection of <code>$.on()</code> style event handlers that are executed in a specific order.</h2>
+					</section>
+					<section>
+						<h2>Going Fast Tip #1:</h2>
+						<p class="fragment">
+							When building your app, build features by augmenting the lifecycle through observers, computed properties, and actions.
+						</p>
+					</section>
 				</section>
 
-				
 
-				
+				<section>
+					<h2>Augmenting the lifecycle</h2>
+					<p class="fragment">lets look at some examples</p>
+				</section>
+
+
+
+
 
 			</div>
 		</div>
