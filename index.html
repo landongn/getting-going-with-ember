@@ -96,6 +96,33 @@
 						</aside>
 					</section>
 
+	
+					<section>
+						<h2>The Basic Pitch</h2>
+						<h3>Flexible, Declarative, Composable API</h3>
+						<h4>Flexible</h4>
+						<pre class="fragment"><code data-trim contenteditable>
+import Ember from 'ember';
+
+export default Ember.Component.extend({
+
+  didInsertElement: function () {
+  	// do something when the component is appended to the dom
+  	this.get('parentElement').send('someActionName');
+  },
+  willDestroyElement: function () {
+    // do something when the component is removed from the dom
+  },
+  
+
+  click: function (event) {
+    // react to a click event
+  },
+
+
+});
+						</code></pre>
+					</section>
 					<section>
 						<h2>The Basic Pitch</h2>
 						<h3>Flexible, Declarative, Composable API</h3>
@@ -103,7 +130,7 @@
 						<pre class="fragment"><code data-trim contenteditable>
 import Ember from 'ember';
 
-export default Ember.Component.extend(SomeMixin, {
+export default Ember.Component.extend({
 
   didInsertElement: function () {
   	// do something when the component is appended to the dom
@@ -129,7 +156,7 @@ export default Ember.Component.extend(SomeMixin, {
 						<pre class="fragment"><code data-trim contenteditable>
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(SomeMixin, {
   // creates a section tag
   tagName: '',
 
