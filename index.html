@@ -82,12 +82,11 @@
 					<section>
 						<h2>The Basic Pitch</h2>
 						<p class="fragment">Flexible, Declarative, Composable API.</p>
-						<p class="fragment">Mixins, forward-compatable web components.</p>
-						<p class="fragment">(if you use ember-cli) write ES6 JS today.</p>
+						<p class="fragment">Forward-compatable web components.</p>
+						<p class="fragment">(if you use ember-cli) you can write ES6 JS today.</p>
 						<p class="fragment">Dedication to sane depreciations, RFC process.</p>
-						<p class="fragment">Constantly Improving.</p>
-						<p class="fragment"><i>Behavioral</i> actions API.</p>
-						<p class="fragment">Writing ember fast makes you feel like a superhero.</p>
+						<p class="fragment">Collection of great ideas others have had.</p>
+						<p class="fragment">Isn't trying to be clever</p>
 
 						<aside class="notes">
 							<br> - No focus on build tools, no focus on compilers, no focus on testing integration.  It's the most batteries included framework with ember-cli
@@ -97,75 +96,6 @@
 					</section>
 
 
-					<section>
-						<h2>The Basic Pitch</h2>
-						<h3>Flexible, Declarative, Composable API</h3>
-						<h4>Flexible</h4>
-						<pre class="fragment"><code data-trim contenteditable>
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-
-	didInsertElement: function () {
-		// do something when the component is appended to the dom
-	},
-
-	willDestroyElement: function () {
-		// do something when the component is removed from the dom
-	}
-
-});
-						</code></pre>
-					</section>
-					<section>
-						<h2>The Basic Pitch</h2>
-						<h3>Flexible, Declarative, Composable API</h3>
-						<h4>Declarative</h4>
-						<pre class="fragment"><code data-trim contenteditable>
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-
-	cart: [],
-
-	isEmpty: function () {
-	return this.get('cart').length ? true ; false;
-	}.property('cart')
-
-});
-
-{{#if isEmpty}}
-	<p>You have no items in your cart!</p>
-{{else}}
-	<p>({{cart.length}}) in your cart</p>
-{{/if}}
-
-						</code></pre>
-					</section>
-					<section>
-						<h2>The Basic Pitch</h2>
-						<h3>Flexible, Declarative, Composable API</h3>
-						<h4>Composable</h4>
-						<pre class="fragment"><code data-trim contenteditable>
-import Ember from 'ember';
-
-// define a component that implements SomeMixin was well
-export default Ember.Component.extend(SomeMixin, {
-	// creates a section tag
-	tagName: '',
-
-	// will populate the class attr of the tag
-	classNames: ['rad-component'],
-
-	// binds dataColumns to data-colums and dataRows to data-rows attrs
-	attributeBindings: ['data-columns', 'data-rows'],
-
-	// binds the isActive component property to the class 'is-active'
-	// based on isActive being a truthy property
-	classNameBindings: ['isActive', 'isDisabled']
-});
-						</code></pre>
-					</section>
 				</section>
 
 				<section>
@@ -279,12 +209,80 @@ Router.map(function() {
 
 
 				<section>
-					<h2>Augmenting the lifecycle</h2>
-					<p class="fragment">lets look at some examples</p>
+					<section>
+						<h2>Augmenting the lifecycle</h2>
+						<p class="fragment">lets look at some examples</p>
+					</section>
+
+					<section>
+					<p>Computed Properties give you an easy way to make your own lifecycle events meaningful:</p>
+<pre class="fragment">
+	<code>
+//stateA/controller.js [note: uses prototype extension]
+export default Ember.Controller.extend({
+
+  // define a computed property that updates
+  // a slice of an array when it's filtering key changes.
+  arraySlice: function () {
+
+    var thisSlice = [];
+    var filter = this.get("filterProp");
+    this.get('arrayData').forEach(function (item, iter) {
+      if (item.get(filter)) {
+        thisSlice.push(item);
+      }
+    });
+    return thisSlice;
+  // old style property signal
+  }.property('filterProp');
+});
+	</code>
+</pre>
+					</section>
+					<section>
+					<p>the <code>2.0</code> way:</p>
+<pre class="fragment">
+	<code>
+//stateA/controller.js [note: does NOT use prototype extensions]
+// side note: this is the preferred way to do it.
+export default Ember.Controller.extend({
+
+  // define a computed property that updates
+  // a slice of an array when it's filtering key changes.
+  arraySlice: Ember.computed('filterProp', function (key, value) {
+
+    var thisSlice = [];
+    var filter = this.get("filterProp");
+    this.get('arrayData').forEach(function (item, iter) {
+      if (item.get(filter)) {
+        thisSlice.push(item);
+      }
+    });
+    return thisSlice;
+  }
+});
+	</code>
+</pre>
+					</section>
+
+					<section>
+					<p>There's some great APIs to be found in the <code>computed</code> namespace</p>
+						<ul>
+							<li><pre>mapBy</pre></li>
+							<li><pre>lte</pre></li>
+							<li><pre>gte</pre></li>
+							<li><pre>filterBy</pre></li>
+						</ul>
+					</section>
 				</section>
 
 
-
+			<section>
+				<section>
+					<h1>Actions</h1>
+					<h2>Bubbling events.</h2>
+				</section>
+			</section>
 
 
 			</div>
