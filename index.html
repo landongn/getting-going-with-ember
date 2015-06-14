@@ -54,8 +54,8 @@
 						<h1>Who Am I?</h2>
 						<h2>I'm Landon (@landongn)</h2>
 						<p class="fragment">I'm a full stack developer, but my primary focus is on front-end.</p>
-						<p class="fragment">I work for Sony Network Entertainment International <br />(We build the PlayStation UI)</p>
-						<p class="fragment">I've been writing ember for the last three or so years.</p>
+						<p class="fragment">I work for Gaikai / Sony Network Entertainment International <br />(I help build PlayStation Now)</p>
+						<p class="fragment">I've been writing ember for about three years.</p>
 					</section>
 
 					<section>
@@ -65,14 +65,15 @@
 						<p class="fragment">then bad Backbone</p>
 						<p class="fragment">then bad Angular</p>
 						<p class="fragment">then bad Ember</p>
-						<p class="fragment">then good Ember</p>
+						<p class="fragment">then kinda good Ember</p>
 						<aside class="notes">
-							<br>- jQuery plugins made life easy to pump tons of functionality into your apps, but was messy
-							<br>- backbone made some modest improvements in the lifecycle by introducing routing
-							<br>- Angular was so fancy! Dependency injections, more intelligent routing, data binding!
-							<br>- Angular was also a mess, in my opinion.  The lack of overall vision and project definition felt like module-mud-pie
-							<br>- Ember went through a ton of churn early, but the focus on routing and being built with more conventions was pleasent
-							<br>- Ember feels like Objective-C, in a lot of ways. the MVC paradigm has survived since Objective-J / Sproutcore days, this is a good thing
+							<p>Started out writing giant object literals in namespaces</p>
+							<p>then decided to write everything as a plugin</p>
+							<p>then figured that collections and models were a good idea</p>
+							<p>data binding was pretty sweet, but... oh.</p>
+							<p>then i wrote piles and piles of imperative, procedural ember</p>
+							<p>then i started trying to write declarative ember</p>
+							<p>imperative versus declarative was mostly a sanity choice.</p>
 						</aside>
 					</section>
 				</section>
@@ -80,13 +81,14 @@
 
 				<section>
 					<section>
-						<h2>The Basic Pitch</h2>
-						<p class="fragment">Flexible, Declarative, Composable API.</p>
-						<p class="fragment">Forward-compatable web components.</p>
-						<p class="fragment">(if you use ember-cli) you can write ES6 JS today.</p>
-						<p class="fragment">Dedication to sane depreciations, RFC process.</p>
-						<p class="fragment">Collection of great ideas others have had.</p>
-						<p class="fragment">Isn't trying to be clever</p>
+						<h2>The Pitch:</h2>
+						<p class="fragment">It's flexible.</p>
+						<p class="fragment">It's terse.</p>
+						<p class="fragment">It's compatable.</p>
+						<p class="fragment">Write ES6 JS today.</p>
+						<p class="fragment">RFC process.</p>
+						<p class="fragment">and, uh..</p>
+						<p class="fragment">I like the grammar.<span class="fragment">..</span></p>
 
 						<aside class="notes">
 							<br> - No focus on build tools, no focus on compilers, no focus on testing integration.  It's the most batteries included framework with ember-cli
@@ -105,17 +107,25 @@
 					</section>
 
 					<section>
-						<h2>The Router</h2>
+						<h2>Declarative <i>Templates</i></h2>
 						<p class="fragment">
-							The most important element of ember.
+							Templates are used as foundational structure for what's under the hood.
 						</p>
 						<p class="fragment">
-							Defines states the application can react to.
+							User events go down, actions go up.
+						</p>
+						<p class="fragment">
+							Components don't <i>have</i> to have a template.
 						</p>
 					</section>
 
 					<section>
-						<h2>Example Routing Definition</h2>
+						<h2>The Router is kind of like a rubix cube with callbacks.</h2>
+						<p class="fragment">When the router detects a change, it kicks off a series of ordered events -- a lifecyle -- that reconfigures <i>all the things.</i></p>
+					</section>
+
+					<section>
+						<h2>In A Nutshell</h2>
 <pre data-trim><code>
 // app/router.js
 Router.map(function() {
@@ -141,12 +151,6 @@ Router.map(function() {
 					</section>
 
 					<section>
-						<h2>The Router is kind of like a rubix cube with callbacks.</h2>
-						<p class="fragment">When the router detects a change, it kicks off a series of ordered events -- a lifecyle -- that reconfigures <i>all the things.</i></p>
-						<p class="fragment">It first configures it's Route classes:</p>
-					</section>
-
-					<section>
 						<p class="fragment"><code>beforeModel(transition)</code></p>
 						<p class="fragment">
 							<code>
@@ -168,16 +172,6 @@ Router.map(function() {
 								renderTemplate()
 							</code>
 						</p>
-					</section>
-
-					<section>
-						<p class="fragment">then, once the templates are rendered (in <code>Route::renderTemplate</code>).</p>
-						<p class="fragment">controller contexts are created based on what's defined in the templates (more on that later)</p>
-						<p class="fragment">view lifecycle events then start:</p>
-					</section>
-
-					<section>
-						<p class="fragment"><code>beforeModel(transition)</code></p>
 						<p class="fragment">
 							<code>
 								willInsertElement()
@@ -197,10 +191,13 @@ Router.map(function() {
 
 
 					<section>
-						<h2>Treat the lifecycle as a collection of <code>$.on()</code> style event handlers that are executed in a specific order.</h2>
+
 					</section>
 					<section>
 						<h2>Going Fast Tip #1:</h2>
+						<p class="fragment">
+							Treat the lifecycle as a collection of <code>$.on()</code> style event handlers that are executed in a specific order.
+						</p>
 						<p class="fragment">
 							When building your app, build features by augmenting the lifecycle through observers, computed properties, and actions.
 						</p>
@@ -216,31 +213,6 @@ Router.map(function() {
 
 					<section>
 					<p>Computed Properties give you an easy way to make your own lifecycle events meaningful:</p>
-<pre class="fragment">
-	<code>
-//stateA/controller.js [note: uses prototype extension]
-export default Ember.Controller.extend({
-
-  // define a computed property that updates
-  // a slice of an array when it's filtering key changes.
-  arraySlice: function () {
-
-    var thisSlice = [];
-    var filter = this.get("filterProp");
-    this.get('arrayData').forEach(function (item, iter) {
-      if (item.get(filter)) {
-        thisSlice.push(item);
-      }
-    });
-    return thisSlice;
-  // old style property signal
-  }.property('filterProp');
-});
-	</code>
-</pre>
-					</section>
-					<section>
-					<p>the <code>2.0</code> way:</p>
 <pre class="fragment">
 	<code>
 //stateA/controller.js [note: does NOT use prototype extensions]
@@ -267,11 +239,23 @@ export default Ember.Controller.extend({
 
 					<section>
 					<p>There's some great APIs to be found in the <code>computed</code> namespace</p>
-						<ul>
-							<li><pre>mapBy</pre></li>
-							<li><pre>lte</pre></li>
-							<li><pre>gte</pre></li>
-							<li><pre>filterBy</pre></li>
+						<ul style="float:left; width: 30%; border: none; box-shadow: none;">
+							<li><pre style="box-shadow:none; font-size: 1em;">mapBy</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">filterBy</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">equal</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">match</pre></li>
+						</ul>
+						<ul style="float:left; width: 30%; border: none; box-shadow: none;">
+							<li><pre style="box-shadow:none; font-size: 1em;">min</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">sum</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">union</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">and</pre></li>
+						</ul>
+						<ul style="float:left; width: 30%; border: none; box-shadow: none;">
+							<li><pre style="box-shadow:none; font-size: 1em;">empty</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">sort</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">uniq</pre></li>
+							<li><pre style="box-shadow:none; font-size: 1em;">intersect</pre></li>
 						</ul>
 					</section>
 				</section>
