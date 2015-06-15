@@ -110,10 +110,13 @@
 					<section>
 						<h2>Declarative <i>Templates</i></h2>
 						<p class="fragment">
-							Templates are where you structure your app, using outlets and components.
+							Templates are where the structure your app is <i>designed</i>, using <code>outlets</code> and <code>components</code>.
 						</p>
 						<p class="fragment">
 							User events go down the stack, actions go up the stack.
+						</p>
+						<p class="fragment">
+							we can use this to our advantage when we design our component layer, by selectively computing and binding to things further down the stack.
 						</p>
 					</section>
 
@@ -125,104 +128,39 @@
 					</section>
 
 					<section>
-						<h2>The Router is kind of like a rubix cube with callbacks.</h2>
-						<p class="fragment">When the router detects a change, it kicks off a series of ordered events -- a lifecyle -- that reconfigures <i>all the things.</i></p>
+						<h2>Block vs. Isolate Components</h2>
+						<p>
+
+<pre data-trim class="fragment"><code>
+// isolate component, has no {{yeild}}-able content.
+{{isolate-component SomeBinding=ParentContext.Property}}
+</code>
+						</pre>
+						</p>
+						
+						<p>
+<pre data-trim class="fragment"><code>
+// block style component, {{yeild}}-able content.
+
+{{#block-component SomeBinding=ParentContext.Property}}
+	// put dom here, more components, whatever
+{{/block-component}}
+</code>
+						</pre> </p>
 					</section>
-
-					<section>
-						<h2>In A Nutshell</h2>
-<pre data-trim><code>
-// app/router.js
-Router.map(function() {
-
-  // defines a standalone route with no substates or arguments
-  // routable as 'stateA'
-  this.route('stateA');
-
-  // defines a standalone route with no substates and an argument
-  // routable as 'stateB'
-  this.route('stateB', {path: '/stateB/:someArgument'});
-
-  // defines a route with a child state
-  // routable as superState.loading, superState.error,
-  // superState.index, superState.childState
-  this.route('superState', function () {
-  	this.route('childState');
-  });
-
-});
-
-</code></pre>
-					</section>
-
-					<section>
-						<p class="fragment"><code>beforeModel(transition)</code></p>
-						<p class="fragment">
-							<code>
-								model(params)
-							</code>
-						</p>
-						<p class="fragment">
-							<code>
-								afterModel()
-							</code>
-						</p>
-						<p class="fragment">
-							<code>
-								setupController(controller, model)
-							</code>
-						</p>
-						<p class="fragment">
-							<code>
-								renderTemplate()
-							</code>
-						</p>
-						<p class="fragment">
-							<code>
-								willInsertElement()
-							</code>
-						</p>
-						<p class="fragment">
-							<code>
-								didInsertElement()
-							</code>
-						</p>
-						<p class="fragment">
-							<code>
-								willDestroyElement()
-							</code>
-						</p>
-					</section>
-
-
-					<section>
-
-					</section>
-					<section>
-						<h2>Going Fast Tip #1:</h2>
-						<p class="fragment">
-							Treat the lifecycle as a collection of <code>$.on()</code> style event handlers that are executed in a specific order.
-						</p>
-						<p class="fragment">
-							When building your app, build features by augmenting the lifecycle through observers, computed properties, and actions.
-						</p>
-					</section>
-				</section>
-
 
 				<section>
 					<section>
-						<h2>Augmenting the lifecycle</h2>
-						<p class="fragment">lets look at some examples</p>
+						<h2>Roll your own lifecycles.</h2>
 					</section>
 
 					<section>
-					<p>Computed Properties give you an easy way to make your own lifecycle events meaningful:</p>
+					<p>Computed Properties provide ways to make your own lifecycle events meaningful</p>
 <pre class="fragment">
 	<code>
 //stateA/controller.js [note: does NOT use prototype extensions]
 // side note: this is the preferred way to do it.
-export default Ember.Controller.extend({
+export default Ember.Component.extend({
 
   // define a computed property that updates
   // a slice of an array when it's filtering key changes.
