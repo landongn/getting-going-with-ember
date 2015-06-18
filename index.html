@@ -29,6 +29,11 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+		<style>
+			.emberized, h1 {
+				background: linear-gradient(to bottom, #fe845a, #d14e37); -webkit-background-clip: text;-webkit-text-fill-color: transparent;
+			}</style>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -42,8 +47,8 @@
 			<div class="slides">
 
 				<section>
-					<h1>Going Fast With Ember</h1>
-					<h3>Beyond the first few months</h3>
+					<h1 style="font-size: 2.5em;">Going Fast With <span class="emberized">Ember</span></h1>
+					<h3>Three Years Later</h3>
 					<p>
 						<small>Created by <a href="http://landongn.com">Landon Noss</a> / <a href="http://twitter.com/landongn">@landongn</a></small>
 					</p>
@@ -51,8 +56,8 @@
 
 				<section>
 					<section>
-						<h1>Who Am I?</h2>
-						<h2>I'm Landon (@landongn)</h2>
+						<h1 class="emberized">Who Am I?</h2>
+						<h2>I'm Landon</h2>
 						<p class="fragment">I'm a full stack developer, but my primary focus is on front-end.</p>
 						<p class="fragment">I work for Gaikai / Sony Network Entertainment International <br />
 						(I help build PlayStation Now)</p>
@@ -70,8 +75,8 @@
 						<aside class="notes">
 							<p>Started out writing giant object literals in namespaces</p>
 							<p>then decided to write everything as a plugin</p>
-							<p>then figured that collections and models were a good idea</p>
-							<p>data binding was pretty sweet, but... oh.</p>
+							<p>then classes were a thing</p>
+							<p>then routing and controllers were popular</p>
 							<p>then i wrote piles and piles of imperative, procedural ember</p>
 							<p>then i started trying to write more declarative ember</p>
 							<p>imperative versus declarative was mostly a sanity choice.</p>
@@ -79,23 +84,32 @@
 					</section>
 				</section>
 
-
 				<section>
 					<section>
-						<h2>The Pitch:</h2>
+						<h2>The Subjective Stuff:</h2>
 						<p class="fragment">It's flexible.</p>
 						<p class="fragment">It's terse.</p>
 						<p class="fragment">It's compatable.</p>
-						<p class="fragment">Write ES6 JS today.</p>
-						<p class="fragment">RFC process.</p>
-						<p class="fragment">and, uh..</p>
-						<p class="fragment">I like the grammar.<span class="fragment">..</span></p>
+						<p class="fragment">It's written in vanilla ES6.</p>
+						<p class="fragment">RFC.</p>
+						<p class="fragment">Community</p>
 
 						<aside class="notes">
-							<br> - No focus on build tools, no focus on compilers, no focus on testing integration.  It's the most batteries included framework with ember-cli
-							<br> - jQuery, Handlebars (Htmlbars), RSVP, Babel, node, etc
-							<br> - ES6 opens up doors for proper modularization, getting rid of quirks and tribulations of things like r.js, browserify,
+							<p>I want to have sensible defaults that do 75% of what I want, and well furnished toolbox to accomplish the last 25%</p>
+							<p>That last 25% is usually animations, event handling, and templates </p>
+							<p>I want to be able to use almost<sup>*</sup> any library in a straightforward way</p>
+							<p>I have to know how it's written under the hood, without having to learn someone elses opinion on how javascript should work</p>
+							<p>I want to know where the framework is headed, both short and long term, so I can better manage change on my codebase</p>
+							<p>Updating to a new version warns me if the next version bump will depreciate something, via my console</p>
 						</aside>
+					</section>
+
+					<section>
+						<h2>The Super Subjective Stuff:</h2>
+						<p class="fragment">Working with teams is <span class="emberized">hard</span></p>
+						<p class="fragment">Ember helps define a grammar</p>
+						<p class="fragment">Class types all have the same API</p>
+						<p class="fragment">Moving the important state management into the URL is really important</p>
 					</section>
 
 
@@ -290,7 +304,7 @@ export default Ember.Controller.extend({
 				history: true,
 				center: true,
 
-				transition: 'fade', // none/fade/slide/convex/concave/zoom
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
