@@ -91,8 +91,8 @@
 						<p class="fragment">It's terse.</p>
 						<p class="fragment">It's compatable.</p>
 						<p class="fragment">It's written in vanilla ES6.</p>
-						<p class="fragment">RFC.</p>
-						<p class="fragment">Community</p>
+						<p class="fragment">The RFC Process.</p>
+						<p class="fragment">The Community</p>
 
 						<aside class="notes">
 							<p>I want to have sensible defaults that do 75% of what I want, and well furnished toolbox to accomplish the last 25%</p>
@@ -110,14 +110,93 @@
 						<p class="fragment">Ember helps define a grammar</p>
 						<p class="fragment">Class types all have the same API</p>
 						<p class="fragment">Moving the important state management into the URL is really important</p>
+						<aside class="notes">
+							<p>every developer has their own preferences for implementing common stuff </p>
+							<p>that argument wastes time that could be spent just building a thing</p>
+							<p>ember is completely batteries included, and has a deep catalog of features</p>
+							<p>because a route is a route is a route, making changes is simplified, as is debugging</p>
+							<p>the router, when used appropriately, simplifies state management immensely</p>
+						</aside>
 					</section>
-
-
 				</section>
 
 				<section>
 					<section>
-						<h2>Declarative<span class="fragment"><i>?</i></span></h2>
+						<h2>So what even <i>is</i> an Ember?</h2>
+					</section>
+					<section>
+						<h2>The most important parts</h2>
+						<h3 class="fragment">uhh</h3>
+					</section>
+					<section>
+						<h2>Lets talk about a few concepts first</h2>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Single Responsibility Principle</h2>
+						<p>Every class should have responsibility over a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class</p>
+						<p>- wikipedia.com | Robert C. Martin</p>
+					</section>
+
+					<section>
+						<h2>Uniform Access Principle</h2>
+						<p>All services offered by a module should be available through a uniform notation, 
+						which does not betray whether they are implemented through storage or through computation</p>
+						<p>- wikipedia.com | Bertrand Meyer</p>
+					</section>
+
+					<section>
+						<h2>So what?</h2>
+					</section>
+
+					<section>
+					<h2>show of hands: who's written this function before?</h2>
+<pre data-trim>
+<code>
+
+parseData: function (data) {
+  this.name = data.name;
+  this.email = data.email;
+  this.token = data.token;
+  this.fullName = data.firstName + ' ' + data.lastName;
+  this.validAccount = data.has_verified ? true: false;
+}
+
+</code>
+</pre>
+					</section>
+
+					<section>
+						<h2>what about this?</h2>
+<pre data-trim>
+<code>
+
+filterSet: function (key) {
+  var ret = [];
+  for (var i = 0; i > this.set; i++) {
+    if (this.set[i].prop === key) {
+      ret.push(this.set[i]);
+    }
+  }
+  return ret;
+}
+
+</code>
+</pre>
+					</section>
+
+					<section>
+						<h2>This sucks. </h2>
+						<p class="fragment">We're so busy writing the <i>how</i></p>
+						<p class="fragment">we sometimes lose sight of the <i>what</i></p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Declarative<span class="fragment">?</span></h2>
 						<blockquote class="fragment">a style of building the structure and elements of computer programs, that expresses the logic of a computation without describing its control flow.</blockquote>
 					</section>
 
